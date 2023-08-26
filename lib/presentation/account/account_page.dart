@@ -101,7 +101,8 @@ class _AccountPageState extends State<AccountPage> {
                         child: ListTile(
                           title: Text('Order#${order.id}', style: const TextStyle(fontWeight: FontWeight.bold),),
                           subtitle: Text('Rp. ${formatAngka(order.attributes!.totalPrice)}'),
-                          trailing: Text('${order.attributes!.statusOrder}', style: const TextStyle(fontStyle: FontStyle.italic)),
+                          trailing: Text('${formatTgl(order.attributes!.createdAt!)}\n${order.attributes!.statusOrder}', style: const TextStyle(fontStyle: FontStyle.italic)),
+                          
                         ),
                       );
                     },
@@ -254,5 +255,14 @@ class _AccountPageState extends State<AccountPage> {
   String formatAngka(int? number) {
     final formatter = NumberFormat('#,###');
     return formatter.format(number);
+  }
+  // String formatTgl(String? string) {
+  //   DateTime string = DateTime.now();
+  //   final formatter = DateFormat('dd-MM-yyyy');
+  //   return formatter.format(string);
+  // }
+  String formatTgl(DateTime dateTime) {
+    final formatter = DateFormat('dd/MM/yyyy');
+    return formatter.format(dateTime);
   }
 }
