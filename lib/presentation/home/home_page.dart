@@ -198,7 +198,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               child: BlocBuilder<CheckoutBloc, CheckoutState>(
-                builder: (context, state) {
+                builder: (context, state) {          
                   if (state is CheckoutLoaded) {
                     return badges.Badge(
                       badgeStyle: const badges.BadgeStyle(

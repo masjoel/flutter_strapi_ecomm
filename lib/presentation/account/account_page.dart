@@ -9,6 +9,7 @@ import '../../bloc/checkout/checkout_bloc.dart';
 import '../../common/global_variables.dart';
 import '../../data/models/responses/auth_response_model.dart';
 import '../cart/cart_page.dart';
+import '../cart/order_detail_page.dart';
 import '../home/home_page.dart';
 
 class AccountPage extends StatefulWidget {
@@ -82,7 +83,8 @@ class _AccountPageState extends State<AccountPage> {
             thickness: 2,
             height: 1,
           ),
-          const Text('List Order', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+          const Text('List Order',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
           Expanded(child: BlocBuilder<ListOrderBloc, ListOrderState>(
             builder: (context, state) {
               return state.maybeWhen(
@@ -95,16 +97,32 @@ class _AccountPageState extends State<AccountPage> {
                   return ListView.builder(
                     itemBuilder: (context, index) {
                       final order = data.data![index];
-                      return Card(
-                        elevation: 10,
-                        // shadowColor: const Color(0xffEE4D2D),
-                        child: ListTile(
-                          title: Text('Order#${order.id}', style: const TextStyle(fontWeight: FontWeight.bold),),
-                          subtitle: Text('Rp. ${formatAngka(order.attributes!.totalPrice)}'),
-                          trailing: Text('${formatTgl(order.attributes!.createdAt!)}\n${order.attributes!.statusOrder}', style: const TextStyle(fontStyle: FontStyle.italic)),
-                          
-                        ),
-                      );
+                      return InkWell(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    OrderDetailPage(order: order),
+                              ),
+                            );
+                          },
+                          child: Card(
+                            elevation: 5,
+                            child: ListTile(
+                              title: Text(
+                                'Order#${order.id}',
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              subtitle: Text(
+                                  'Rp. ${formatAngka(order.attributes!.totalPrice)}'),
+                              trailing: Text(
+                                  '${formatTgl(order.attributes!.createdAt!)}\n${order.attributes!.statusOrder}',
+                                  style: const TextStyle(
+                                      fontStyle: FontStyle.normal)),
+                            ),
+                          ));
                     },
                     itemCount: data.data!.length,
                   );
@@ -251,11 +269,13 @@ class _AccountPageState extends State<AccountPage> {
       ),
     );
   }
+
   // --- fungsi tambahan ---
   String formatAngka(int? number) {
     final formatter = NumberFormat('#,###');
     return formatter.format(number);
   }
+
   // String formatTgl(String? string) {
   //   DateTime string = DateTime.now();
   //   final formatter = DateFormat('dd-MM-yyyy');

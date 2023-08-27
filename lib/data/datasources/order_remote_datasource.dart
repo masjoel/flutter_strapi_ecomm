@@ -27,6 +27,8 @@ class OrderRemoteDatasource {
 
     if (response.statusCode == 200) {
       return Right(OrderResponseModel.fromJson(response.body));
+      // return Right(List<OrderResponseModel>.from(jsonDecode(response.body)
+      //     .map((x) => OrderResponseModel.fromMap(x))));
     } else {
       return const Left('server error');
     }
