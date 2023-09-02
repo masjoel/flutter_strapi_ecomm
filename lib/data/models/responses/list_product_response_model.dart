@@ -1,10 +1,6 @@
-// To parse this JSON data, do
-//
-//     final listProductResponseModel = listProductResponseModelFromJson(jsonString);
-
 import 'dart:convert';
-
 import 'package:flutter/foundation.dart';
+import '../../../common/global_variables.dart';
 
 class ListProductResponseModel {
   List<Product>? data;
@@ -122,7 +118,7 @@ class Attributes {
         quantity: json["quantity"],
         price: json["price"],
         inStock: json["inStock"],
-        image: json["image"],
+        image: GlobalVariables.baseUrl + json["image"],
         distributor: json["distributor"],
         createdAt: json["createdAt"] == null
             ? null

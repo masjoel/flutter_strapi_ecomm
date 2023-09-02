@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class GlobalVariables {
-  static const baseUrl = 'https://gio-ecommerce.masjoel.com';
+  static const baseUrl = 'https://strapicomm.dutacoding.my.id';
+  // static const baseUrl = 'https://gio-ecommerce.masjoel.com';
   static const List<Map<String, String>> categoryImages = [
     {
       'title': 'Mobiles',
