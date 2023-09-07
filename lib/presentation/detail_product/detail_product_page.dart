@@ -4,6 +4,7 @@ import 'package:flutter_strapi_ecomm/bloc/checkout/checkout_bloc.dart';
 
 import 'package:flutter_strapi_ecomm/data/models/responses/list_product_response_model.dart';
 import 'package:flutter_strapi_ecomm/presentation/cart/cart_page.dart';
+import 'package:intl/intl.dart';
 
 class DetailProductPage extends StatefulWidget {
   const DetailProductPage({
@@ -49,7 +50,7 @@ class _DetailProductPageState extends State<DetailProductPage> {
           const SizedBox(
             height: 4,
           ),
-          Text('Rp ${widget.product.attributes!.price!}'),
+          Text('Rp.${formatAngka(widget.product.attributes!.price!)}'),
           const SizedBox(
             height: 8,
           ),
@@ -91,5 +92,10 @@ class _DetailProductPageState extends State<DetailProductPage> {
         ],
       ),
     );
+  }
+  // --- fungsi tambahan ---
+  String formatAngka(int? number) {
+    final formatter = NumberFormat('#,###');
+    return formatter.format(number);
   }
 }

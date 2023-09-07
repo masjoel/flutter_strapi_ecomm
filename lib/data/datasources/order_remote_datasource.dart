@@ -39,7 +39,7 @@ class OrderRemoteDatasource {
 
     final response = await http.get(
       Uri.parse(
-          '${GlobalVariables.baseUrl}/api/orders?filters[userId][\$eq]=${authData.user.id}'),
+          '${GlobalVariables.baseUrl}/api/orders?filters[userId][\$eq]=${authData.user.id}&sort[0]=id:desc'),
       headers: <String, String>{
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ${authData.jwt}'
